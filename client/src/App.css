@@ -1,0 +1,160 @@
+:root {
+  font-size: 16px;
+  font-family: 'Open Sans';
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --transition-speed: 600ms;
+}
+
+.App {
+  display: grid;
+  min-height: 100vh;
+  column-gap: 5px;
+}
+
+main {
+  grid-area: main;
+  margin: 0 20px;
+}
+
+.navbar {
+  grid-area: navbar;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+/* .nav-item:last-child {
+  margin-top: auto;
+} */
+
+.nav-item:nth-last-child(-n +2) {
+  margin-top: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  filter: grayscale(100%) opacity(0.7);
+  transition: var(--transition-speed);
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.link-text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.nav-link svg {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+
+/* Small screens (mobile) */
+
+@media only screen AND (max-width:660px) {
+  .App {
+    grid-template-rows: 90vh 12vh;
+    grid-template-areas: 'main' 'navbar';
+  }
+  .logo {
+    display: none;
+  }
+  main {
+    overflow: scroll;
+  }
+}
+
+/* Large screens (desktop) */
+
+@media only screen AND (min-width: 660px) {
+  .App {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas: 'navbar main main main main main main main main main main main';
+  }
+  .navbar, .navbar-nav {
+    width: 5rem;
+    overflow: scroll;
+    transition: width 60ms ease;
+  }
+  .navbar:hover, .navbar:hover .navbar-nav {
+    width: 16rem;
+  }
+  .navbar:hover .link-text {
+    display: inline;
+  }
+  .navbar-nav {
+    flex-direction: column;
+    height: 100vh;
+    position: fixed;
+  }
+  .logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    font-size: 1.5rem;
+    letter-spacing: 0.3ch;
+    width: 100%;
+  }
+  .logo svg {
+    transform: rotate(0deg);
+    transition: var(--transition-speed);
+  }
+  .logo-text {
+    display: inline;
+    position: absolute;
+    left: -999px;
+    transition: var(--transition-speed);
+  }
+  .navbar:hover .logo svg {
+    margin-left: 11rem;
+    transform: rotate(-540deg);
+  }
+  .navbar:hover .logo-text {
+    left: 0px;
+  }
+  .job-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .job-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 15px;
+    row-gap: 20px;
+  }
+  .jobcard {
+    border: 1px solid #000;
+    height: 200px;
+  }
+}
