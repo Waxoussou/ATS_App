@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import "./homepage.css";
-import { useState } from 'react';
 
 
 const Notification = ({ msg }) => {
@@ -8,10 +8,15 @@ const Notification = ({ msg }) => {
     return <div style={style}> <p>{msg}</p> </div>
 }
 
-const HomePage = ({ login }) => {
+const HomePage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('')
+
+    const authContext = useContext(AuthContext)
+
+    const { isLoggedIn, login } = authContext;
+
 
     const showNotification = (msg) => {
         setErrorMsg(msg)
@@ -22,30 +27,13 @@ const HomePage = ({ login }) => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        if (!username || !password) { showNotification("username or password missing") }
-        else {
-            const body = { username, password };
-            try {
-                const res = await fetch('api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
-                }).catch(err => console.log('fetch err: ', err));
-
-                const json = await res.json();
-                if (json.status === 'failed' || !json.data) {
-                    showNotification(json.msg);
-                    throw new Error('no user found');
-                };
-                login(json.data, json.token)
-            }
-            catch (error) {
-                console.warn(error);
-            }
-        }
+        (!username || !password) ?
+            showNotification("username or password missing") :
+            login(username, password)
     }
 
-    return <div className="home-page">
+
+    return (!isLoggedIn ? < div className="home-page" >
         <div className="login-container">
             <form onSubmit={handleFormSubmit} method="post">
                 {errorMsg && <Notification msg={errorMsg} />}
@@ -64,7 +52,7 @@ const HomePage = ({ login }) => {
                 <input type="submit" value="Register" disabled />
             </form>
         </div>
-    </div>
+    </div > : '')
 }
 
 export default HomePage;
