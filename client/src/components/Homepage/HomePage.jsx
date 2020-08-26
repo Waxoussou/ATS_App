@@ -33,7 +33,7 @@ const HomePage = () => {
     }
 
 
-    return (!isLoggedIn ? < div className="home-page" >
+    return < div className="home-page" >
         <div className="login-container">
             <form onSubmit={handleFormSubmit} method="post">
                 {errorMsg && <Notification msg={errorMsg} />}
@@ -52,7 +52,7 @@ const HomePage = () => {
                 <input type="submit" value="Register" disabled />
             </form>
         </div>
-    </div > : '')
+    </div >
 }
 
 export default HomePage;

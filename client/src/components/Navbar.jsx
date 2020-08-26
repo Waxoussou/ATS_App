@@ -4,9 +4,9 @@ import AuthContext from '../context/auth/authContext';
 const Navbar = ({ Link }) => {
     const authContext = useContext(AuthContext);
 
-    const { logout } = authContext;
+    const { isLoggedIn, logout } = authContext;
 
-    return <div className="navbar">
+    return (isLoggedIn ? < div className="navbar" >
         <ul className="navbar-nav">
             <li className="logo">
                 <a href="#" className="nav-link">
@@ -50,16 +50,16 @@ const Navbar = ({ Link }) => {
                     <span className="link-text ">Settings</span>
                 </Link>
             </li>
-            <li className="nav-item" >
-                <div className="nav-link" onClick={logout}>
+            <li className="nav-item" onClick={logout}>
+                <Link to='#' className="nav-link" >
                     <svg viewBox="0 0 512 512" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd">
                         <path fill="currentColor" d="m211.863281 512c-116.820312 0-211.863281-95.035156-211.863281-211.863281 0-95.152344 64.007812-179.171875 155.664062-204.328125 9.386719-2.53125 19.109376 2.949218 21.699219 12.363281 2.574219 9.398437-2.949219 19.121094-12.355469 21.691406-76.359374 20.964844-129.699218 90.980469-129.699218 170.273438 0 97.34375 79.199218 176.554687 176.554687 176.554687 97.351563 0 176.550781-79.210937 176.550781-176.554687 0-77.429688-51.757812-146.996094-125.863281-169.171875-9.34375-2.792969-14.644531-12.636719-11.851562-21.980469 2.800781-9.328125 12.664062-14.621094 21.972656-11.84375 88.9375 26.617187 151.050781 110.082031 151.050781 202.996094 0 116.828125-95.039062 211.863281-211.859375 211.863281zm0 0" />
                         <path fill="currentColor" d="m211.863281 229.515625c-9.75 0-17.65625-7.894531-17.65625-17.652344v-194.207031c0-9.761719 7.90625-17.65625 17.65625-17.65625s17.652344 7.894531 17.652344 17.65625v194.207031c0 9.757813-7.902344 17.652344-17.652344 17.652344zm0 0" />
                     </svg>
                     <span className='link-text'>Logout</span>
-                </div>
+                </Link>
             </li>
-        </ul></div>
+        </ul></div > : null)
 }
 
 export default Navbar; 

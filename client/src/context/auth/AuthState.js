@@ -5,7 +5,7 @@ import AUTH_ACTIONS from '../../actions/authAction';
 
 const AuthState = props => {
     const initialState = {
-        token: localStorage.getItem('token'),
+        token: localStorage.getItem('authorization Bearer'),
         isLoggedIn: false,
         isFetching: true,
         username: null,
@@ -13,6 +13,23 @@ const AuthState = props => {
     };
 
     const [state, dispatch] = useReducer(authReducer, initialState);
+
+    const loadUser = async () => {
+        const { token } = state;
+        console.log('token: ', token)
+        if (token) {
+            try {
+                // let headers = { 'Content-Type': 'application/json' };
+                // headers['authorization Bearer'] = token;
+                const res = await fetch('api/auth/', { headers: { Authorization: token } });
+                const json = await res.json()
+                console.log('loadUser return :', json)
+                dispatch({ type: AUTH_ACTIONS.LOAD_USER, payload: { username: json.username, token: token } })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 
     const login = async (username, password) => {
         const body = { username, password };
@@ -55,6 +72,7 @@ const AuthState = props => {
                 isFetching: state.isFetching,
                 isLoggedIn: state.isLoggedIn,
                 username: state.username,
+                loadUser,
                 register,
                 login,
                 logout,

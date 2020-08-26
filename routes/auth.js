@@ -3,8 +3,22 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const { isAuthenticated } = require('../middlewares/permissions');
 const ENV = require('../ENV');
 const Recruiter = require('../models/recruiter');
+
+// @route     GET api/auth
+// @desc      Get logged in user
+// @access    Private
+router.get('/', isAuthenticated, async (req, res) => {
+    try {
+        const user = await Recruiter.findById(req.user._id).select('-password');
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 router.post('/register', async (req, res) => {
     try {

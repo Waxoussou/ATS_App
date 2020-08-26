@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext, useReducer } from 'react';
 import Filters from '../Filters'
-import './temporary.css';
 import Usercard from './Usercard';
 import Jobseeker from './Jobseeker';
 
+import AuthContext from '../../context/auth/authContext';
+
+import './temporary.css';
 
 const Candidates = () => {
 
+
     const [users, setUsers] = useState([]);
     const [selectedCandidate, setSelection] = useState({ uid: '' });
+
     const selectUser = () => {
         setSelection({ uid: 1 })
     }
