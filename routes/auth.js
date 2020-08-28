@@ -23,9 +23,9 @@ router.get('/', isAuthenticated, async (req, res) => {
 router.post('/register', async (req, res) => {
     try {
         const { name, lastname, username, password } = req.body
-        const users = await Recruiter.findOne({ username: username })
+        const user = await Recruiter.findOne({ username: username })
 
-        if (!user) return res.status(401).send('username already exist');
+        if (user) return res.status(401).send({ status: 'FAILED', msg: 'username already exist' });
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -34,11 +34,11 @@ router.post('/register', async (req, res) => {
             password: hashedPassword
         });
         const saved_user = await newUser.save();
-        res.status(200).send(saved_user);
+        res.status(200).send({ status: 'SUCCESS', data: saved_user });
 
     } catch (error) {
         console.log(`err : ${error}`);
-        res.status(500).send(error)
+        res.status(500).send({ status: 'FAILED', msg: error })
     }
 })
 
@@ -58,8 +58,27 @@ router.post('/register', async (req, res) => {
             res.status(500).send({ status: 'failed', msg: error })
         }
     })
+
     .get('/logout', async (req, res) => {
         res.json({ action: 'logout' })
+    })
+
+    .delete('/deleteProfile', isAuthenticated, async (req, res) => {
+        const { _id } = req.user,
+            { password } = req.body;
+        try {
+            const user = await Recruiter.findOne({ _id });
+            const isPasswordValid = await bcrypt.compare(password, user.password)
+            if (isPasswordValid) {
+                const removedUser = await Recruiter.deleteOne({ _id });
+                res.json(removedUser);
+            } else {
+                throw new Error('you need to enter your password to delete your profile')
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(401).send({ status: 'FAILED', msg: error.message, type: 'DELETE_PROFILE' })
+        }
     })
 
 module.exports = router; 

@@ -2,7 +2,8 @@ const AUTH_ACTIONS = {
     LOAD_USER: 'LOAD_USER',
     LOGIN: "LOGIN",
     LOGOUT: "LOGOUT",
-    REGISTER: "REGISTER"
+    REGISTER: "REGISTER",
+    ERROR: 'AUTH_ERROR'
 }
 
 export default AUTH_ACTIONS;

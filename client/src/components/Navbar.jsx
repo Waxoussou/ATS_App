@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthContext from '../context/auth/authContext';
 
 const Navbar = ({ Link }) => {
@@ -6,9 +6,11 @@ const Navbar = ({ Link }) => {
 
     const { isLoggedIn, logout } = authContext;
 
-    return (isLoggedIn ? < div className="navbar" >
+    const [navOpen, setNavOpen] = useState(false);
+
+    return (isLoggedIn ? < div className={`navbar ${navOpen ? 'active' : ''} `} >
         <ul className="navbar-nav">
-            <li className="logo">
+            <li className="logo" onClick={() => setNavOpen(!navOpen)}>
                 <a href="#" className="nav-link">
                     <span className="link-text logo-text">MyTeam</span>
                     <svg aria-hidden="true" focusable="false" data-prefix="fad" data-icon="angle-double-right"

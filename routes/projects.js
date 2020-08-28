@@ -6,7 +6,6 @@ const Job = require('../models/job')
  * GET ALL PROJECT FROM A USER
  * GET api/projects
  */
-
 router.get('/', async (req, res) => {
     const { _id } = req.user
     try {
@@ -18,8 +17,8 @@ router.get('/', async (req, res) => {
 })
 
     .post('/new', (req, res) => {
-        console.log(req.user)
         req.user ? res.status(200).json(req.user) : res.status(500).send('nooo')
+    
     })
 
 

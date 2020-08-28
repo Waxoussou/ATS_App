@@ -3,13 +3,17 @@ import AUTH_ACTIONS from '../../actions/authAction';
 export default (state, action) => {
     switch (action.type) {
         case AUTH_ACTIONS.REGISTER:
-            return { ...state, ...action.payload };
+            return { ...state, isFetching: true };
             break;
         case AUTH_ACTIONS.LOAD_USER:
+            console.log('AUTH LOAD USER BEFORE RETURNING STATE')
             return {
-                ...state, isLoggedIn: true, isFetching: false,
+                ...state,
+                isLoggedIn: true,
+                isFetching: false,
                 username: action.payload.username,
-                token: action.payload.token
+                token: action.payload.token,
+                // error: null
             };
             break;
         case AUTH_ACTIONS.LOGIN:
@@ -32,6 +36,12 @@ export default (state, action) => {
                 token: null
             };
             break;
+        case AUTH_ACTIONS.ERROR:
+            return {
+                ...state,
+                isFetching: false,
+                error: { ...action.payload.error }
+            }
         default:
             return state;
     }

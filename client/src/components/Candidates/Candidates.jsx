@@ -8,8 +8,6 @@ import AuthContext from '../../context/auth/authContext';
 import './temporary.css';
 
 const Candidates = () => {
-
-
     const [users, setUsers] = useState([]);
     const [selectedCandidate, setSelection] = useState({ uid: '' });
 

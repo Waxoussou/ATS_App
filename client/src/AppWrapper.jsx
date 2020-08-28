@@ -11,13 +11,13 @@ import AuthContext from './context/auth/authContext';
 
 const AppWrapper = () => {
     const authState = useContext(AuthContext);
-    const { isLoggedIn, loadUser } = authState;
+    const { isLoggedIn, loadUser, token } = authState;
 
     useEffect(() => {
         loadUser()
     }, [])
 
-    return (!isLoggedIn ? <HomePage />
+    return (!isLoggedIn || !token ? <HomePage />
         :
         <div className='App'>
             <Router>
