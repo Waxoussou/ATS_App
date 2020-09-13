@@ -1,4 +1,3 @@
-const { Mongoose } = require("mongoose");
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -13,7 +12,21 @@ const companySchema = new Schema({
         city: String,
         cp: Number,
         country: String
-    }
+    },
+    contact: {
+        phone: Number,
+        email: String,
+        website: String,
+        social_media: [{ name: String, link: String }],
+    },
+    peoples: [{
+        name: String, latname: String, position: String,
+        contact: {
+            phone: Number,
+            email: String,
+        }
+    }],
+
 })
 
 const Company = mongoose.model('Company', companySchema);

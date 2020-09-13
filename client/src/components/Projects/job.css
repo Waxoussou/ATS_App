@@ -1,0 +1,61 @@
+.jobcard-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-project-modal {
+    background: rgb(91, 164, 197);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    animation: enter .25s ease;
+}
+
+.project-modal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-modal-header button {
+    align-items: center;
+}
+
+.project-modal-body {
+    align-self: center;
+}
+
+.add-project-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 300px;
+    justify-content: space-between;
+}
+
+.project-input {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.project-input label {
+    color: rgb(32, 32, 32);
+    font-weight: bold;
+}
+
+.project-input input {
+    height: 2em;
+}
+
+@keyframes enter {
+    from {
+        transform: translateY(100%)
+    }
+    to {
+        transform: translateY(0)
+    }
+}

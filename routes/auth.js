@@ -45,7 +45,7 @@ router.post('/register', async (req, res) => {
     .post('/login', async (req, res) => {
         try {
             const { username, password } = req.body;
-
+            console.log(username, password)
             const user = await Recruiter.findOne({ username: username });
             if (!user) return res.status(401).send({ status: 'failed', msg: 'user does not exist' });
 

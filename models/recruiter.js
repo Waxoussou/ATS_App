@@ -2,20 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recruiterSchema = new Schema({
-    name: {
-        type: String
+    name: String,
+    lastname: String,
+    username: {
+        type: String,
+        required: true,
+        unique: true
     },
-    lastname: {
-        type: String
-    },
-    username: { type: String, unique: true },
     password: {
         type: String,
         required: true
     },
     contact: {
-        tel: { type: Number },
-        mail: { type: String },
+        tel: Number,
+        mail: String,
         adress: {
             street: { type: String },
             city: { type: String },
@@ -23,19 +23,8 @@ const recruiterSchema = new Schema({
         }
     },
     company: {
-        name: { type: String },
-        contact: {
-            mail: String,
-            tel: Number,
-            web: String,
-            address: {
-                street: { type: String },
-                city: { type: String },
-                country: String
-            },
-        }
+        type: mongoose.Types.ObjectId, ref: 'Company'
     }
-
 
 })
 

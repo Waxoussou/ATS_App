@@ -40,13 +40,13 @@ main {
   width: 100%;
 }
 
-/* .nav-item:last-child {
-  margin-top: auto;
-} */
-
-.nav-item:nth-last-child(-n +2) {
+.nav-item:last-child {
   margin-top: auto;
 }
+
+/* .nav-item:nth-last-child(-n +2) {
+  margin-top: auto;
+} */
 
 .nav-link {
   display: flex;

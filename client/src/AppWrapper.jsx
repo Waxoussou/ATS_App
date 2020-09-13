@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Jobs from "./components/Projects/Jobs";
 import Candidates from "./components/Candidates/Candidates";
 import Settings from "./components/Settings";
+import AddProject from './components/Projects/AddProject';
 
 import AuthContext from './context/auth/authContext';
 
@@ -23,9 +24,10 @@ const AppWrapper = () => {
             <Router>
                 <Navbar Link={Link} ></Navbar>
                 <main>
-                    <Route path="/jobs" component={Jobs} />
+                    <Route path="/jobs" render={() => <Jobs Link={Link} />} />
                     <Route path="/candidates" component={Candidates} />
                     <Route path="/settings" component={Settings} />
+                    <Route path="/addProject" component={AddProject} />
                 </main>
             </Router>
         </div>
