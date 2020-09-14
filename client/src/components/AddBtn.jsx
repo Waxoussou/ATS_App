@@ -77,7 +77,7 @@ const ProjectForm = ({ handleProjectStateInput, handleLocalisation, handleProjec
     return <div>
         <form onSubmit={handleProjectSubmit} method="post">
             {projectFormState.step === 1 && <><div className='project-input'>
-                <label htmlFor='skills'>Entreprise</label>
+                <label htmlFor='company'>Entreprise</label>
                 <input onChange={handleProjectStateInput} name="company" id="company" type="text" />
             </div>
                 <div className='project-input'>

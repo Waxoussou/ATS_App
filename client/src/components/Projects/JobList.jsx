@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import AuthContext from '../../context/auth/authContext';
 import ProjectContext from '../../context/project/projectContext';
 import JobCard from './JobCard';
@@ -17,7 +19,9 @@ const JobList = ({ match }) => {
         {projects.length > 0 ? projects.map((job, index) => <JobCard key={index} job={job} />) :
             <>
                 <h3>NO PROJECTS STARTED YET</h3>
-                <button>create your first project</button>
+                <Link to='/addProject'>
+                    <button>create your first project</button>
+                </Link>
             </>}
     </div>
 }

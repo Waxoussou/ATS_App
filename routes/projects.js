@@ -50,6 +50,13 @@ router.post('/addApplication:id', async (req, res) => {
 
 })
 
+router.delete('/delete:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const deleted_doc = await Job.findByIdAndDelete(id);
+    console.log(deleted_doc);
+    res.status(200).send('deleted ' + id + 'from DB')
+})
 
 
 module.exports = router;

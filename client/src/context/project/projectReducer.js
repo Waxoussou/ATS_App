@@ -5,12 +5,8 @@ export default (state, action) => {
         case PROJECT_ACTIONS.ADD_PROJECT:
             return {
                 ...state,
-                title: action.payload.title,
-                company: action.payload.company,
-                localisation: action.payload.localisation,
                 isLoading: true
             }
-            break;
         case PROJECT_ACTIONS.LOAD_PROJECTS:
             return {
                 ...state,
@@ -19,6 +15,5 @@ export default (state, action) => {
             }
         default:
             return state
-            break;
     }
 }

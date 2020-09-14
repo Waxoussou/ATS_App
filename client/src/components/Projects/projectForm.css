@@ -1,0 +1,86 @@
+.information-step {
+    margin: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.step-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.step-link span {
+    width: 100%;
+    height: 1px;
+    background: black;
+}
+
+.step {
+    width: 90px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: 30%;
+}
+
+.current {
+    background: rgb(92, 145, 105);
+    color: white;
+    border: none;
+}
+
+.enlighted span {
+    height: 3px;
+    background: rgb(65, 136, 65);
+}
+
+.add-project-form fieldset {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.add-project-form fieldset label {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-project-form fieldset input {
+    height: 2em;
+    min-width: 300px;
+    width: 90%;
+    
+}
+
+.form-controls {
+    display: flex;
+    justify-content: center;
+    margin: 15px auto;
+}
+
+.form-controls button {
+    margin: auto 15px;
+}
+
+.selected-skill {
+    border: 1px solid #000;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.selected-skill p {
+    grid-column: 2 / span 9;
+}
+
+.delete-skill {
+    grid-column: span 2;
+    align-self: center;
+    cursor: pointer;
+}
+
+.skills-input label {
+    width: 300px !important;
+}
