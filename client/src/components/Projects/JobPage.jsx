@@ -18,9 +18,17 @@ const JobPage = () => {
 
     return <div>
         <h3>JOB PAGE ACCUEIL</h3>
-        <p>{current.title}</p>
-        <p>{current.location}</p>
-        {current.required_skills.tech.map(stack => <p key={stack.id}>{stack.name}</p>)}
+        <div className='project-informations'>
+            <p>{current.title}</p>
+            <p>{current.localisation.city}</p>
+            <div className="salary-information">
+                <p>{current.salary.from} <span> - </span>{current.salary.to} <span>{current.salary.currency} </span> per {current.salary.per}</p>
+            </div>
+        </div>
+        <div className="skills-list">
+            <h4>Skills</h4>
+            {current.required_skills.tech.map(stack => <p key={stack._id}>{stack.name}</p>)}
+        </div>
 
         <button onClick={handleDelete}>delete</button>
     </div>

@@ -29,7 +29,7 @@ router.post('/new', async (req, res) => {
         const project = new Job({
             title,
             required_skills: { tech: required_tech, tools: required_tools },
-            localisation,
+            localisation: { city: localisation },
             salary,
             recruiterId: _id
         })

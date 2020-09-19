@@ -13,10 +13,19 @@ const AddProject = () => {
         step: 1,
         title: '',
         company: '',
-        location: '',
+        localisation: '',
         salary: { from: null, to: null, per: 'year', currency: 'euro' },
         skills: []
     })
+    const isDisabled = _ => {
+        const step1 = formState.title && formState.company && formState.localisation ? true : false;
+        const step2 = formState.salary.from && formState.salary.to && formState.skills ? true : false;
+
+        if ((formState.step === 1 && step1) || (formState.step === 2 && step2)) {
+            return false
+        }
+        return true
+    }
 
     const handleBack = () => {
         formState.step === 1 ?
@@ -45,8 +54,8 @@ const AddProject = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const { title, company, location, salary, skills } = formState;
-        addProject(title, company, location, salary, skills);
+        const { title, company, localisation, salary, skills } = formState;
+        addProject(title, company, localisation, salary, skills);
         history.goBack();
     }
 
@@ -63,7 +72,7 @@ const AddProject = () => {
             {formState.step === 1 && <ProjectDetails handleState={handleState}
                 title={formState.title}
                 company={formState.company}
-                location={formState.location} />}
+                localisation={formState.localisation} />}
             {formState.step === 2 && <SkillsAndSalary handleSalary={handleSalary}
                 handleSkills={handleSkills}
                 skills={formState.skills} />}
@@ -72,13 +81,13 @@ const AddProject = () => {
         <div className='form-controls'>
             <button onClick={handleBack}>Back</button>
             {formState.step < 3 ?
-                <button onClick={handleNext}>next</button> : <button onClick={handleSubmit} type='submit'>Create Project</button>}
+                <button onClick={handleNext} disabled={isDisabled()} >next</button> : <button onClick={handleSubmit} type='submit'>Create Project</button>}
         </div>
     </div>
 
 }
 
-const ProjectDetails = ({ handleState, title, company, location }) => {
+const ProjectDetails = ({ handleState, title, company, localisation }) => {
 
     return <Fragment>
         <fieldset >
@@ -87,8 +96,8 @@ const ProjectDetails = ({ handleState, title, company, location }) => {
             <input onChange={handleState} type="text" name="title" id="title" value={title} />
             <label htmlFor="company">Entreprise</label>
             <input onChange={handleState} type="text" name="company" id="company" value={company} />
-            <label htmlFor="location">Localisation du Poste</label>
-            <input onChange={handleState} type="text" name="location" id="location" value={location} />
+            <label htmlFor="localisation">Localisation du Poste</label>
+            <input onChange={handleState} type="text" name="localisation" id="localisation" value={localisation} />
         </fieldset>
     </Fragment>
 }
@@ -161,13 +170,13 @@ const SkillsAndSalary = ({ handleSalary, handleSkills, skills }) => {
 }
 
 const CheckFormBeforePost = ({ state }) => {
-    const { title, company, location, salary, skills } = state;
+    const { title, company, localisation, salary, skills } = state;
     return <Fragment>
         <p>CHECK YOUR RESULT BEFORE SENDING </p>
         <div>
             <p>TITLE : {title}</p>
             <p>company : {company}</p>
-            <p>Where : {location}</p>
+            <p>Where : {localisation}</p>
             <p>salary : {salary.from} - {salary.to}</p>
             <p>skills : {skills.map(skill => {
                 return <div key={skill._id}>

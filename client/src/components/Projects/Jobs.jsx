@@ -10,9 +10,9 @@ const Jobs = () => {
         <div className="job-section-header">
             <h3>JOBS - Dashboard</h3>
             <div>
-                <button >Add a new project
-                <Link to='/addProject'></Link>
-                </button>
+                <Link to='/addProject'>
+                    <button >Add a new project</button>
+                </Link>
             </div>
             {/* <AddBtn /> */}
         </div>
