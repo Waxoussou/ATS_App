@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useReducer, useContext } from 'react';
+import React from 'react';
 import AppWrapper from './AppWrapper';
 import AuthState from './context/auth/AuthState';
 import ProjectState from './context/project/ProjectState';
+import CandidateState from "./context/candidate/candidateState";
+
 import './App.css';
 
 function App() {
   return (
     <AuthState>
       <ProjectState>
-        <AppWrapper />
+        <CandidateState>
+          <AppWrapper />
+        </CandidateState>
       </ProjectState>
     </AuthState>
   );

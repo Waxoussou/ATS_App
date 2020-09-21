@@ -5,6 +5,7 @@ import HomePage from './components/Homepage/HomePage';
 import Navbar from './components/Navbar';
 import Jobs from "./components/Projects/Jobs";
 import Candidates from "./components/Candidates/Candidates";
+import AddCandidate from './components/Candidates/AddCandidate';
 import Settings from "./components/Settings";
 import AddProject from './components/Projects/AddProject';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -33,6 +34,7 @@ const AppWrapper = () => {
                         <Route path="/addProject" component={AddProject} />
                         <Route path="/project/:id" component={JobPage} />
                         <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/addCandidate" component={AddCandidate} />
                         <Redirect path='/' to='/dashboard' />
                     </Switch>
                 </main>

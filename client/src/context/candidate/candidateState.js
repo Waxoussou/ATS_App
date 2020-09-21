@@ -33,7 +33,7 @@ const CandidateState = props => {
                     body: JSON.stringify(body)
                 }
             }
-            const res = await fetch('api/candidates', options)
+            const res = await fetch('/api/candidates', options)
             const json = await res.json();
             console.log('new candidate : ', json);
             dispatch({ type: CANDIDATE_ACTIONS.CREATE_CANDIDATE })
@@ -49,3 +49,5 @@ const CandidateState = props => {
         </CandidateContext.Provider >
     );
 }
+
+export default CandidateState;

@@ -10,20 +10,22 @@ router.get('/', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
+});
+
+router.post('/', async (req, res) => {
+    const { _id } = req.user;
+    const { name, lastname, position, expected_position, experience, availability } = req.body
+    try {
+        const candidate = new Candidate({
+            name, lastname,
+            position, expected_position, experience,
+            availability
+        })
+        const new_candidate = candidate.save();
+        res.status(201).send(new_candidate)
+    } catch (error) {
+        res.status(500).send(error);
+    }
 })
 
-    .post('/', async (req, res) => {
-        const { _id } = req.user;
-        const { name, lastname, position, expected_position, experience, availability } = req.body
-        try {
-            const candidate = new Candidate({
-                name, lastname,
-                position, expected_position, experience,
-                availability
-            })
-            const new_candidate = candidate.save();
-            res.status(201).send(new_candidate)
-        } catch (error) {
-            res.status(500).send(error);
-        }
-    })
+module.exports = router;

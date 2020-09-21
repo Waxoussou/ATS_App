@@ -11,6 +11,7 @@ const Recruiter = require('../models/recruiter');
 // @desc      Get logged in user
 // @access    Private
 router.get('/', isAuthenticated, async (req, res) => {
+    console.log('HELLLO AUTH')
     try {
         const user = await Recruiter.findById(req.user._id).select('-password');
         res.json(user);
@@ -43,6 +44,7 @@ router.post('/register', async (req, res) => {
 })
 
     .post('/login', async (req, res) => {
+        console.log('LOGIN ROUTE')
         try {
             const { username, password } = req.body;
             console.log(username, password)

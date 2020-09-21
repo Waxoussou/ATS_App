@@ -47,6 +47,7 @@ const AuthState = props => {
                 const res = await fetch('api/auth/login', options)
                     .catch(err => console.log('fetch err: ', err));
                 const json = await res.json();
+                console.log(json)
                 if (json.status === 'failed' || !json.data) throw new Error(json.msg);
                 dispatch({ type: AUTH_ACTIONS.LOGIN, payload: { username: json.data.username, token: json.token } });
             }

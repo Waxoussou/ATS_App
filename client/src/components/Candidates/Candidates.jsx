@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, useReducer } from 'react';
+import { Link } from 'react-router-dom';
 import Filters from '../Filters'
 import Usercard from './Usercard';
 import Jobseeker from './Jobseeker';
@@ -49,7 +50,10 @@ const Candidates = () => {
     const changeFilters = (filtre) => setFilter(filtre)
 
     return <div>
-        <Filters changeFilters={changeFilters}></Filters>
+        <div className='candidates__filters'>
+            <Filters changeFilters={changeFilters}></Filters>
+            <Link to='addCandidate' ><button>ADD NEW CANDIDATE</button></Link>
+        </div>
         <h1 className="section-title">CANDIDATS</h1>
         {selectedCandidate.uid ? <Jobseeker unselectCandidate={unselectCandidate} /> : <div>
             {
