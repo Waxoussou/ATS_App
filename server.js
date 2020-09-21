@@ -23,8 +23,10 @@ app.use(bodyParser.json());
 // ROUTES
 const auth = require('./routes/auth.js');
 const projects = require('./routes/projects');
+const candidates = require('./routes/candidates');
 app.use('/api/auth', auth)
 app.use('/api/projects', isAuthenticated, projects)
+app.use('/api/candidates', isAuthenticated, candidates)
 // ********************
 
 // Serve static assets in production

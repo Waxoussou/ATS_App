@@ -11,15 +11,7 @@ const jobSchema = new Schema({
     status: { type: String, enum: ['created', 'short-list', 'done'], default: 'created' },
     recruiterId: { type: Schema.Types.ObjectId, ref: 'Recruiter' },
     company: { type: Schema.Types.ObjectId, ref: 'Company' },
-    applications: [{
-        id: {
-            type: mongoose.ObjectId,
-            default: new mongoose.Types.ObjectId()
-        },
-        candidate_id: { type: Schema.Types.ObjectId, ref: 'Candidate' },
-        date_of_application: { type: Date },
-        status: { type: String, enum: ['saved', 'called', 'interviewed', 'assessment', 'proposal', 'hired'] },
-    }],
+    applications: [{ type: mongoose.Types.ObjectId, ref: 'Application' }],
     isActive: { type: Boolean, default: true },
     required_skills: {
         tech: [{ name: { type: String }, xp: Number }],
