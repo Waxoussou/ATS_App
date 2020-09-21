@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const candidateSchema = new Schema({
     name: { type: String, required: true },
     lastname: String,
-    position: String,
+    job_title: String,
+    current_position: String,
+    current_company: String,
     expected_position: String,
     contact: {
         address: {

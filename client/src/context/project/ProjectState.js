@@ -18,7 +18,6 @@ const ProjectState = props => {
     const { token } = authContext;
 
     const loadProject = async () => {
-        console.log('LOADING PROJECTS ...');
         try {
             const options = {
                 headers: {
@@ -28,7 +27,6 @@ const ProjectState = props => {
             }
             const res = await fetch('/api/projects/', options);
             const user_projects = await res.json();
-            console.log(user_projects);
             dispatch({ type: PROJECT_ACTIONS.LOAD_PROJECTS, payload: { projects: user_projects } })
         } catch (error) {
             console.log('fetch data FN error : ', error)
@@ -48,7 +46,6 @@ const ProjectState = props => {
             const res = await fetch('/api/projects/new', options)
             const json = await res.json()
             dispatch({ type: PROJECT_ACTIONS.ADD_PROJECT })
-            console.log('now load projects')
             loadProject()
         } catch (error) {
             console.log(error)
@@ -63,9 +60,7 @@ const ProjectState = props => {
             }
             const res = await fetch('/api/projects/delete' + _id, options)
             const json = await res.json();
-            console.log(json)
             loadProject();
-
         } catch (error) {
             console.log(error)
         }
