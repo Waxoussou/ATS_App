@@ -29,7 +29,23 @@ const JobPage = () => {
             <h4>Skills</h4>
             {current.required_skills.tech.map(stack => <p key={stack._id}>{stack.name}</p>)}
         </div>
-
+        <div className="project-dashboard-section">
+            <div className='project-dashboard-section-header'>
+                <h3>votre tableau de bord</h3>
+            </div>
+            <div className="project-dashboard-item applications-number">
+                <h4>{current.applications.length}</h4>
+                <p>candidatures dans le projet</p>
+            </div>
+            <div className="project-dashboard-item interviews-number">
+                <h4>{current.applications.length}</h4>
+                <p>interviews réalisées</p>
+            </div>
+            <div className="project-dashboard-item meeting-number">
+                <h4>{current.applications.length}</h4>
+                <p>process recrutement terminés </p>
+            </div>
+        </div>
         <button onClick={handleDelete}>delete</button>
     </div>
 }

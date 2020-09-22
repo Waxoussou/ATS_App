@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom'
 
-const Jobseeker = ({ unselectCandidate }) => {
+const Jobseeker = ({ unselectCandidate, current }) => {
+
+    const CurrentCandidate = ({ current }) => Object.keys(current).map(k => typeof current[k] !== 'object' ?
+        <Fragment><p>{k} : {current[k]} </p></Fragment> :
+        <CurrentCandidate current={current[k]} />)
 
     return <div>
-        <p>Jobseeker</p>
-        <button onClick={unselectCandidate}>return </button>
+        <div className='current-candidate-header'>
+            <p>FICHE CANDIDAT</p>
+            <button onClick={unselectCandidate}> close </button>
+        </div>
+        <div className='current-candidate'>
+            {/* <p>{current.name} {current.lastname}</p> */}
+            <CurrentCandidate current={current} />
+        </div>
     </div>
 }
 

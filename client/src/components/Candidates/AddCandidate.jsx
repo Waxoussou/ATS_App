@@ -26,6 +26,7 @@ const AddCandidate = () => {
 
     return <div>
         <form onSubmit={handleSubmit} className='candidate__addForm'>
+        <h3>CREATE A NEW CANDIDATE</h3>
             <label htmlFor="name">name<input onChange={handleChange} type="text" name="name" id="name" /></label>
             <label htmlFor="lastname">lastname<input onChange={handleChange} type="text" name="lastname" id="lastname" /></label>
             <label htmlFor="job-title">job title<input onChange={handleChange} type="text" name="job_title" id="job-title" /></label>

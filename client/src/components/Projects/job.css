@@ -51,6 +51,29 @@
     height: 2em;
 }
 
+/* PROJECT DASHBOARD SECTION */
+
+.project-dashboard-section {
+    border: 1px solid #000;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.project-dashboard-section-header {
+    background: #23232E;
+    color: whitesmoke;
+    grid-column: span 12;
+    padding-left: 10px;
+}
+
+.project-dashboard-item {
+    border: 1px solid rgba(77, 77, 77, 0.678);
+    grid-column: span 4;
+    margin: 5px;
+    padding: 5px;
+}
+
 @keyframes enter {
     from {
         transform: translateY(100%)
