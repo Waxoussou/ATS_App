@@ -19,15 +19,18 @@ const JobPage = () => {
     return <div>
         <h3>JOB PAGE ACCUEIL</h3>
         <div className='project-informations'>
-            <p>{current.title}</p>
-            <p>{current.localisation.city}</p>
+            <p className='project-job-title'> {current.title}</p>
+            <p className='project-localisation'>{current.localisation.city}</p>
             <div className="salary-information">
                 <p>{current.salary.from} <span> - </span>{current.salary.to} <span>{current.salary.currency} </span> per {current.salary.per}</p>
             </div>
         </div>
         <div className="skills-list">
-            <h4>Skills</h4>
-            {current.required_skills.tech.map(stack => <p key={stack._id}>{stack.name}</p>)}
+            <h4 className="skills-list-header">Skills</h4>
+            <div className="skills-list-items">
+                {current.required_skills.tech.map(stack => <p className='skill-item' key={stack._id}>{stack.name}
+                    <li className={`fab fa-${stack.name}`}></li></p>)}
+            </div>
         </div>
         <div className="project-dashboard-section">
             <div className='project-dashboard-section-header'>

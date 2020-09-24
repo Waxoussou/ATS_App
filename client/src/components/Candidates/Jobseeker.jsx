@@ -9,7 +9,12 @@ const Jobseeker = ({ unselectCandidate, current }) => {
 
     return <div>
         <div className='current-candidate-header'>
-            <p>FICHE CANDIDAT</p>
+            <div>
+
+                <p>FICHE CANDIDAT</p>
+                <button>edit</button>
+            </div>
+
             <button onClick={unselectCandidate}> close </button>
         </div>
         <div className='current-candidate'>

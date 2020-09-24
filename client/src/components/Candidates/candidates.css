@@ -4,6 +4,16 @@ ul, li {
     list-style-type: none;
 }
 
+/* HEADER SECTION of USER PAGE  */
+
+.candidates__filters {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+}
+
+
+
 /* USER CARD STYLE */
 
 .user-card {
@@ -93,10 +103,9 @@ ul, li {
     margin-bottom: 16px;
 }
 
-
 /* EDIT CANDIDATE PAGE */
 
-.current-candidate-header{
+.current-candidate-header {
     display: flex;
     justify-content: space-between;
 }

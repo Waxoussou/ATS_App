@@ -1,6 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const Job = require('../models/job')
+const express = require('express');
+const router = express.Router();
+const Job = require('../models/job');
+const Application = require('../models/application');
 
 /**
  * GET ALL PROJECT FROM A USER
@@ -45,8 +46,20 @@ router.post('/new', async (req, res) => {
 router.put('/update:id', async (req, res) => {
 
 })
+/**
+ * ADD APPLICATION TO A PROJECT [:id]
+ * POST api/projects/addApplication:id 
+ */
 
-router.post('/addApplication:id', async (req, res) => {
+router.post('/:project_id/addApplication/:candidate_id', async (req, res) => {
+    // const { project_id, candidate_id } = req.params;
+    const { project_id, candidate_id } = req.params
+    console.log({ project_id, candidate_id })
+    // const new_application = new Application({
+    //     candidate_id,
+    //     status: 'created'
+    // })
+    res.send({ project_id, candidate_id })
 
 })
 
