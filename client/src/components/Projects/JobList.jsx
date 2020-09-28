@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ProjectContext from '../../context/project/projectContext';
 import JobCard from './JobCard';
 
-const JobList = ({ match }) => {
+const JobList = () => {
     const projectContext = useContext(ProjectContext);
     const { loadProject, projects, isLoading } = projectContext;
 

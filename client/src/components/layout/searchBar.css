@@ -6,6 +6,7 @@
     display: flex;
     height: 2.3em;
     align-items: center;
+    overflow: hidden;
 }
 
 .searchBar-container i {
@@ -15,6 +16,7 @@
 #search__input {
     font-size: 16px;
     border: none;
+    width: 100%;
 }
 
 #search__input:focus {

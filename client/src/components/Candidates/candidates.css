@@ -4,6 +4,12 @@ ul, li {
     list-style-type: none;
 }
 
+/* CANDIDATE__SECTION */
+
+.candidate__section{
+    position: relative;
+}
+
 /* HEADER SECTION of USER PAGE  */
 
 .candidates__filters {
@@ -11,8 +17,6 @@ ul, li {
     justify-content: space-between;
     margin: 10px auto;
 }
-
-
 
 /* USER CARD STYLE */
 
@@ -59,7 +63,7 @@ ul, li {
     width: calc(100% - 5px);
 }
 
-.actions-modal ul {
+.actions-modal .actions-list {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -108,4 +112,30 @@ ul, li {
 .current-candidate-header {
     display: flex;
     justify-content: space-between;
+}
+
+.project-picker {
+    background: rgb(198, 206, 206);
+    border: 1px solid #000;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    right: 5%;
+}
+
+.project-picker__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    background: whitesmoke;
+    border-bottom: 1px solid #000;
+}
+
+.project-picker__item {
+    margin: 9px;
+    padding: 5px;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+    overflow: scroll;
 }

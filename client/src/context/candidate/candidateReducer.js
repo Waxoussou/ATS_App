@@ -4,7 +4,7 @@ export default (state, action) => {
     switch (action.type) {
         case CANDIDATE_ACTIONS.CREATE_CANDIDATE:
             return {
-                ...state,
+                ...state
             }
         case CANDIDATE_ACTIONS.LOAD_CANDIDATES:
             return {

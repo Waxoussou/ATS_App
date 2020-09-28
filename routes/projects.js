@@ -52,15 +52,19 @@ router.put('/update:id', async (req, res) => {
  */
 
 router.post('/:project_id/addApplication/:candidate_id', async (req, res) => {
-    // const { project_id, candidate_id } = req.params;
-    const { project_id, candidate_id } = req.params
+    const { project_id, candidate_id } = req.params;
     console.log({ project_id, candidate_id })
-    // const new_application = new Application({
-    //     candidate_id,
-    //     status: 'created'
-    // })
-    res.send({ project_id, candidate_id })
+    const new_application = new Application({
+        candidate_id,
+        status: 'created'
+    })
+    const application = await new_application.save();
 
+    const current_project = await Job.findOne({ _id: project_id })
+    current_project.applications.push(application._id);
+    
+    const updated_project = await current_project.save()
+    res.send({ updated_project });
 })
 
 router.delete('/delete:id', async (req, res) => {
