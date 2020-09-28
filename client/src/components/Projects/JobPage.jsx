@@ -49,6 +49,10 @@ const JobPage = () => {
                 <p>process recrutement terminés </p>
             </div>
         </div>
+        <div className="applications">
+            {/* TEMPORARY */}
+            {current.applications.map(appli => <div>{appli.candidate_id.name} {appli.candidate_id.lastname}</div>)}
+        </div>
         <button onClick={handleDelete}>delete</button>
     </div>
 }

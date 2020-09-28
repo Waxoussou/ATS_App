@@ -18,6 +18,7 @@ const ProjectPicker = ({ handleModal, candidate_id }) => {
             }
             const res = await fetch('/api/projects/' + project_id + '/addApplication/' + candidate_id, options)
             const json = await res.json();
+            console.log(json)
             if (json) handleModal();
         } catch (e) { console.log(e) }
     }
