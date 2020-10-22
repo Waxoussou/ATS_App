@@ -26,14 +26,14 @@ const AddCandidate = () => {
 
     return <div>
         <form onSubmit={handleSubmit} className='candidate__addForm'>
-        <h3>CREATE A NEW CANDIDATE</h3>
+            <h3>CREATE A NEW CANDIDATE</h3>
             <label htmlFor="name">name<input onChange={handleChange} type="text" name="name" id="name" /></label>
             <label htmlFor="lastname">lastname<input onChange={handleChange} type="text" name="lastname" id="lastname" /></label>
             <label htmlFor="job-title">job title<input onChange={handleChange} type="text" name="job_title" id="job-title" /></label>
             <label htmlFor="current_position">current position<input onChange={handleChange} type="text" name="current_position" id="current_position" /></label>
             <label htmlFor="expected_position">desired position<input onChange={handleChange} type="text" name="expected_position" id="expected_position" /></label>
             <label htmlFor="current_company">current company<input onChange={handleChange} type="text" name="current_company" id="current_company" /></label>
-            <input type="submit" value="Create" disabled={!state.name || !state.lastname && true} />
+            <input type="submit" value="Create" disabled={(!state.name || !state.lastname) && true} />
         </form>
     </div >
 }

@@ -4,7 +4,7 @@ export default (state, action) => {
     switch (action.type) {
         case AUTH_ACTIONS.REGISTER:
             return { ...state, isFetching: true };
-            break;
+
         case AUTH_ACTIONS.LOAD_USER:
             console.log('AUTH LOAD USER BEFORE RETURNING STATE')
             return {
@@ -15,7 +15,7 @@ export default (state, action) => {
                 token: action.payload.token,
                 // error: null
             };
-            break;
+
         case AUTH_ACTIONS.LOGIN:
             console.log('from AUTH ACTION LOGIN : :', action.payload)
             localStorage.setItem("authorization Bearer", action.payload.token)
@@ -26,7 +26,7 @@ export default (state, action) => {
                 username: action.payload.username,
                 token: action.payload.token
             };
-            break;
+
         case AUTH_ACTIONS.LOGOUT:
             localStorage.removeItem("authorization Bearer")
             return {
@@ -35,7 +35,7 @@ export default (state, action) => {
                 username: null,
                 token: null
             };
-            break;
+
         case AUTH_ACTIONS.ERROR:
             return {
                 ...state,

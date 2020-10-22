@@ -3,6 +3,7 @@
   font-family: 'Open Sans';
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
+  --bg-main: #F6F6F9;
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
@@ -12,6 +13,7 @@
   display: grid;
   min-height: 100vh;
   column-gap: 5px;
+  background: var(--bg-main);
 }
 
 main {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import ProjectContext from '../../context/project/projectContext';
 
@@ -6,7 +6,10 @@ const ProjectPicker = ({ handleModal, candidate_id }) => {
     const { token } = useContext(AuthContext);
     const { loadProject, projects } = useContext(ProjectContext);
 
-    useEffect(() => { loadProject() }, [])
+    useEffect(() => {
+        loadProject()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const handleClick = async (e) => {
         const { p_id: project_id } = e.target.dataset

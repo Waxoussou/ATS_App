@@ -9,7 +9,6 @@ const JobPage = () => {
     const history = useHistory();
 
     const current = projects.filter(project => project._id === id)[0];
-    const stack = current.required_skills.tech;
 
     const handleDelete = _ => {
         deleteProject(current._id);

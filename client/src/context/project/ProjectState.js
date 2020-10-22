@@ -34,17 +34,16 @@ const ProjectState = props => {
     }
 
     const addProject = async (title, company, localisation, salary, skills) => {
-
         const body = { title, company, localisation, salary, required_tech: skills };
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: token },
             body: JSON.stringify(body)
         }
-
         try {
             const res = await fetch('/api/projects/new', options)
             const json = await res.json()
+            console.log('new project : ', json)
             dispatch({ type: PROJECT_ACTIONS.ADD_PROJECT })
             loadProject()
         } catch (error) {
@@ -60,6 +59,7 @@ const ProjectState = props => {
             }
             const res = await fetch('/api/projects/delete' + _id, options)
             const json = await res.json();
+            console.log('deleted Project : ', json)
             loadProject();
         } catch (error) {
             console.log(error)

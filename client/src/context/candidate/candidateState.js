@@ -67,6 +67,7 @@ const CandidateState = props => {
         try {
             const res = await fetch(`/api/candidates/${id}`, options)
             const json = await res.json()
+            console.log(json)
             loadCandidates();
         } catch (e) {
             console.log(e)

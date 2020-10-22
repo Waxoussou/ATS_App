@@ -10,20 +10,14 @@ const Notification = ({ msg }) => {
 }
 
 const HomePage = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
 
     const authContext = useContext(AuthContext);
 
-    const { isFetching, isLoggedIn, login, register, error } = authContext;
+    const { isFetching, login, register, error } = authContext;
 
-    const showNotification = (msg) => {
-        setErrorMsg(msg)
-        setTimeout(() => {
-            setErrorMsg("")
-        }, 2300);
-    }
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
 
     const handleLogin = async (e) => {
         e.preventDefault();

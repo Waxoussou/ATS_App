@@ -1,7 +1,5 @@
 import React from "react";
 import JobList from "./JobList";
-import AddBtn from '../AddBtn';
-import JobPage from './JobPage';
 import { Link } from 'react-router-dom';
 
 const Jobs = () => {
