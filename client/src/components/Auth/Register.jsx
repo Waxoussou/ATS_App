@@ -1,6 +1,11 @@
 import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 
+const Notification = ({ msg }) => {
+    const style = { borderRadius: 4, minWidth: 200, color: 'white', textAlign: 'center' }
+    return <div style={style}> <p>{msg}</p> </div>
+}
+
 
 function Register() {
     const authContext = useContext(AuthContext);
@@ -13,6 +18,7 @@ function Register() {
         email: '',
         password: ''
     })
+
     const handleChange = async (e) => {
         setRegisterFormState({ ...registerFormState, [e.target.name]: e.target.value });
     }
@@ -30,7 +36,7 @@ function Register() {
             <input onChange={handleChange} type="text" placeholder='username' name='username' id='username' />
             <input onChange={handleChange} type="text" placeholder='email' name='email' id='email' />
             <input onChange={handleChange} type="password" aria-label='password' placeholder='password' name='password' id='password' />
-            <input onChange={handleChange} type="submit" value='REGISTER' />
+            <input type="submit" value='REGISTER' />
         </form>
     </div>
 }

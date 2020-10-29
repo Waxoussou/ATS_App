@@ -11,6 +11,7 @@ import AddProject from './components/Projects/AddProject';
 import Dashboard from './components/Dashboard/Dashboard';
 import AuthContext from './context/auth/authContext';
 import JobPage from './components/Projects/JobPage';
+import Login from './components/Auth/Login';
 
 import './App.css';
 
@@ -30,7 +31,7 @@ function WrapperContainer() {
                 <Navbar ></Navbar>
                 <main>
                     <Switch>
-                        <Route path="/jobs" render={() => <Jobs Link={Link} />} />
+                        <Route path="/jobs" component={Jobs} />
                         <Route path="/candidates" component={Candidates} />
                         <Route path="/settings" component={Settings} />
                         <Route path="/addProject" component={AddProject} />
