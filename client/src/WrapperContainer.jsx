@@ -38,7 +38,7 @@ function WrapperContainer() {
                         <Route path="/project/:id" component={JobPage} />
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/addCandidate" component={AddCandidate} />
-                        <Redirect path='/' to='/dashboard' />
+                        <Redirect path='/' to='/candidates' />
                     </Switch>
                 </main>
             </Router>
