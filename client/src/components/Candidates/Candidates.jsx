@@ -1,6 +1,5 @@
-import React, { useEffect, useContext, useState, Fragment } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Filters from '../Filters';
 import SearchBar from '../layout/SearchBar';
 import Usercard from './Usercard';
 import Jobseeker from './Jobseeker';
@@ -22,10 +21,15 @@ const Candidates = () => {
     })
     const [selectedCandidate, setSelection] = useState({});
 
-    useEffect(() => { loadCandidates() }, []);
+    useEffect(() => {
+        loadCandidates()
+        // eslint-disable-next-line
+    }, []);
+
     useEffect(() => {
         const filter_candidates = candidates.filter(({ name, lastname }) => name.toLowerCase().startsWith(filter.toLowerCase()) || lastname.toLowerCase().startsWith(filter.toLowerCase()));
         setFilter_list(filter_candidates);
+        // eslint-disable-next-line
     }, [filter])
 
     const handleSearch = ({ target: { value: filtre } }) => setFilter(filtre)

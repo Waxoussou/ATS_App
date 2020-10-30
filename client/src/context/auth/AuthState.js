@@ -3,6 +3,9 @@ import AuthContext from './authContext';
 import authReducer from './authReducer';
 import AUTH_ACTIONS from '../../actions/authAction';
 
+
+import { fetchLogin } from '../../API/auth';
+
 const AuthState = props => {
     const initialState = {
         token: localStorage.getItem('authorization Bearer'),
@@ -32,32 +35,21 @@ const AuthState = props => {
     }
 
     const login = async (username, password) => {
-        const type = AUTH_ACTIONS.LOGIN
         if (!username || !password) {
             const error_message = 'username and password are required'
-            dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: { message: error_message, type } } });
-            clearError()
+            return setErrorMessage({ error: { message: error_message, type: 'FORM_FIELD' } });
         } else {
-            const body = { username, password };
-            const options = {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            }
-            try {
-                const res = await fetch('api/auth/login', options)
-                    .catch(err => console.log('fetch err: ', err));
-                const json = await res.json();
-                console.log(json)
-                if (json.status === 'failed' || !json.data) throw new Error(json.msg);
-                dispatch({ type: AUTH_ACTIONS.LOGIN, payload: { username: json.data.username, token: json.token } });
-            }
-            catch (error) {
-                console.warn(error.message);
-                const error_payload = { error: { message: error.message, type } }
-                dispatch({ type: AUTH_ACTIONS.ERROR, payload: error_payload })
-                clearError()
-            }
+            const body = { username, password }
+            const payload = await fetchLogin(body);
+            payload.error ?
+                setErrorMessage(payload) :
+                dispatch({ type: AUTH_ACTIONS.LOGIN, payload: payload });
         }
+    }
+
+    const setErrorMessage = (error) => {
+        dispatch({ type: AUTH_ACTIONS.ERROR, payload: error });
+        clearError();
     }
 
     const clearError = (timeout = 900) => {
@@ -75,18 +67,12 @@ const AuthState = props => {
     const register = async ({ username, name, lastname, email, password }) => {
         const body = { username, lastname, name, email, password };
         const type = AUTH_ACTIONS.REGISTER
-
         for (let input in body) {
             if (!body[input]) {
-                dispatch({
-                    type: AUTH_ACTIONS.ERROR,
-                    payload: { error: { message: 'all fields are required', type } }
-                });
-                clearError()
+                setErrorMessage({ error: { message: 'all fields are required', type } });
                 return;
             }
         }
-
         dispatch({ type: AUTH_ACTIONS.REGISTER });
         try {
             const res = await fetch('api/auth/register', {

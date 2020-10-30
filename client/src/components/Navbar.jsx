@@ -12,10 +12,10 @@ const Navbar = () => {
     return (isLoggedIn ? < div className={`navbar ${navOpen ? 'active' : ''} `} >
         <ul className="navbar-nav">
             <li className="logo" onClick={() => setNavOpen(!navOpen)}>
-                <a href="#" className="nav-link">
+                <div className="nav-link">
                     <span className="link-text logo-text">MyTeam</span>
                     <svg aria-hidden="true" focusable="false" data-prefix="fad" data-icon="angle-double-right"
-                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                        role="img" viewBox="0 0 448 512"
                         className="svg-inline--fa fa-angle-double-right fa-w-14 fa-5x">
                         <g className="fa-group">
                             <path fill="currentColor"
@@ -26,7 +26,7 @@ const Navbar = () => {
                                 className="fa-primary"></path>
                         </g>
                     </svg>
-                </a>
+                </div>
             </li>
             <li className="nav-item">
                 <Link to="/jobs" className="nav-link">

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route,     Switch, Redirect } from 'react-router-dom';
 
 import HomePage from './components/Homepage/HomePage';
 import Navbar from './components/Navbar';
@@ -11,7 +11,7 @@ import AddProject from './components/Projects/AddProject';
 import Dashboard from './components/Dashboard/Dashboard';
 import AuthContext from './context/auth/authContext';
 import JobPage from './components/Projects/JobPage';
-import Login from './components/Auth/Login';
+import CandidateProfile from './components/Candidates/CandidateProfile';
 
 import './App.css';
 
@@ -32,13 +32,14 @@ function WrapperContainer() {
                 <main>
                     <Switch>
                         <Route path="/jobs" component={Jobs} />
+                        <Route path="/candidate/:id" component={CandidateProfile} />
                         <Route path="/candidates" component={Candidates} />
                         <Route path="/settings" component={Settings} />
                         <Route path="/addProject" component={AddProject} />
                         <Route path="/project/:id" component={JobPage} />
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/addCandidate" component={AddCandidate} />
-                        <Redirect path='/' to='/candidates' />
+                        <Redirect path='/' to='/dashboard' />
                     </Switch>
                 </main>
             </Router>

@@ -1,8 +1,6 @@
 import React from 'react';
-import { render, cleanup, screen, fireEvent } from '@testing-library/react';
-
-import { BrowserRouter as Router } from 'react-router-dom';
-import AuthContext from '../context/auth/authContext';
+import { cleanup, screen, fireEvent } from '@testing-library/react';
+import { renderWithContext } from './testUtils';
 
 import Register from '../components/Auth/Register';
 import Login from '../components/Auth/Login';
@@ -168,19 +166,3 @@ describe('NAVBAR Component', () => {
 })
 
 
-const renderWithContext = (ui, propsContext) => {
-    const defaultPropsContext = {
-        token: '',
-        isFetching: false,
-        isLoggedIn: false,
-        username: {},
-        error: { message: '', type: '' },
-    }
-    return render(
-        <AuthContext.Provider
-            value={{ ...defaultPropsContext, ...propsContext }}>
-            <Router>
-                {ui}
-            </Router>
-        </AuthContext.Provider >)
-}

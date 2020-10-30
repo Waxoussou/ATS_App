@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import ProjectContext from '../../context/project/projectContext';
@@ -6,10 +6,11 @@ import JobCard from './JobCard';
 
 const JobList = () => {
     const projectContext = useContext(ProjectContext);
-    const { loadProject, projects, isLoading } = projectContext;
+    const { loadProject, projects } = projectContext;
 
     useEffect(() => {
         loadProject()
+        // eslint-disable-next-line
     }, [])
 
     return <div className='job-container'>
