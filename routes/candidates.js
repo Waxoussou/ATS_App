@@ -25,7 +25,6 @@ router.post('/', async (req, res) => {
             availability, current_company
         })
         const new_candidate = await candidate.save();
-
         res.status(201).send(new_candidate)
     } catch (error) {
         res.status(500).send(error);
