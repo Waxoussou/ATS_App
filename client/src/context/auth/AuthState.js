@@ -4,7 +4,7 @@ import authReducer from './authReducer';
 import AUTH_ACTIONS from '../../actions/authAction';
 
 
-import { fetchLogin } from '../../API/auth';
+import * as API from '../../API/auth';
 
 const AuthState = props => {
     const initialState = {
@@ -19,19 +19,10 @@ const AuthState = props => {
 
     const loadUser = async () => {
         const { token } = state;
-        if (token) {
-            try {
-                const res = await fetch('api/auth/', { headers: { Authorization: token } });
-                const json = await res.json()
-                if (json.success === 'failed') throw new Error(json.msg)
-                dispatch({ type: AUTH_ACTIONS.LOAD_USER, payload: { username: json.username, token: token } })
-            } catch (error) {
-                console.log(error)
-                dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } })
-            }
-        } else {
-            dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } })
-        }
+        const user = await API.fetchLoggedInUser(token);
+        user.status === 'ERROR' ?
+            dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } }) :
+            dispatch({ type: AUTH_ACTIONS.LOAD_USER, payload: { username: user.username, token: token } })
     }
 
     const login = async (username, password) => {
@@ -40,23 +31,12 @@ const AuthState = props => {
             return setErrorMessage({ error: { message: error_message, type: 'FORM_FIELD' } });
         } else {
             const body = { username, password }
-            const payload = await fetchLogin(body);
+            const payload = await API.fetchLogin(body);
             payload.error ?
                 setErrorMessage(payload) :
                 dispatch({ type: AUTH_ACTIONS.LOGIN, payload: payload });
         }
     }
-
-    const setErrorMessage = (error) => {
-        dispatch({ type: AUTH_ACTIONS.ERROR, payload: error });
-        clearError();
-    }
-
-    const clearError = (timeout = 900) => {
-        setTimeout(() => {
-            dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } })
-        }, timeout);
-    };
 
     // Logout
     const logout = () => {
@@ -64,59 +44,44 @@ const AuthState = props => {
     };
 
     // Register
-    const register = async ({ username, name, lastname, email, password }) => {
-        const body = { username, lastname, name, email, password };
-        const type = AUTH_ACTIONS.REGISTER
+    const register = async (body) => {
+        // const body = { username, lastname, firstname, email, password };
         for (let input in body) {
             if (!body[input]) {
-                setErrorMessage({ error: { message: 'all fields are required', type } });
+                setErrorMessage({ error: { message: 'all fields are required', type: AUTH_ACTIONS.REGISTER } });
                 return;
             }
         }
         dispatch({ type: AUTH_ACTIONS.REGISTER });
-        try {
-            const res = await fetch('api/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body)
-            }).catch(err => console.log('RegisterFetch Err: ', err))
-            const json = await res.json();
-            if (json.status === 'FAILED') throw new Error(json.msg)
-            login(username, password);
-        } catch (error) {
-            const error_payload = { error: { message: error.message, type } }
-            dispatch({ type: AUTH_ACTIONS.ERROR, payload: error_payload })
-            clearError()
-        }
+
+        const userSaved = await API.fetchRegister(body)
+        userSaved.status === "SUCCESS" ?
+            login(body.username, body.password) :
+            setErrorMessage(userSaved)
     }
 
     // Delete User
     const deleteProfile = async (password) => {
-        const type = 'DELETE';
-        const options = {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json', Authorization: state.token },
-            body: JSON.stringify({ password })
-        }
-        try {
-            const res = await fetch('api/auth/deleteProfile', options);
-            const json = await res.json();
-            if (json.status === 'FAILED') throw new Error(json.msg);
-            if (json.ok) {
-                dispatch({ type: AUTH_ACTIONS.LOGOUT });
-                dispatch({
-                    type: AUTH_ACTIONS.ERROR,
-                    payload: { error: { message: 'your profile was deleted successfully', type: 'LOGIN' } }
-                })
-                clearError(4000)
-            }
-        } catch (error) {
-            const error_payload = { message: error.message, type };
-            dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: error_payload } })
-            clearError()
+        const deletedUser = await API.fetchDeleteUser(password, state.token);
+        if (deletedUser.status === "FAILED") {
+            setErrorMessage(deletedUser)
+        } else {
+            dispatch({ type: AUTH_ACTIONS.LOGOUT });
+            setErrorMessage({ error: { message: 'your profile was deleted successfully', type: 'DELETE' } });
         }
     }
 
+
+    const setErrorMessage = (error) => {
+        dispatch({ type: AUTH_ACTIONS.ERROR, payload: error });
+        clearError();
+    }
+
+    const clearError = (timeout = 1000) => {
+        setTimeout(() => {
+            dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } })
+        }, timeout);
+    };
     return (
         <AuthContext.Provider
             value={{

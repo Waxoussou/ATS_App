@@ -6,7 +6,6 @@ export default (state, action) => {
             return { ...state, isFetching: true };
 
         case AUTH_ACTIONS.LOAD_USER:
-            console.log('AUTH LOAD USER BEFORE RETURNING STATE')
             return {
                 ...state,
                 isLoggedIn: true,
@@ -17,7 +16,6 @@ export default (state, action) => {
             };
 
         case AUTH_ACTIONS.LOGIN:
-            console.log('from AUTH ACTION LOGIN : :', action.payload)
             localStorage.setItem("authorization Bearer", action.payload.token)
             return {
                 ...state,

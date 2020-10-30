@@ -20,7 +20,7 @@ const Login = () => {
 
     return <div className='login-container'>
         <form onSubmit={handleSubmit} aria-label='form'>
-            {error && <p>{error.message}</p>}
+            {error?.type === 'LOGIN' && <p>{error.message}</p>}
             <label htmlFor="username">Username
                 <input onChange={handleChange} type="text" name="username" id="username"
                     placeholder='username' value={state.username} />

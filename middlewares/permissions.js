@@ -11,11 +11,10 @@ const isAuthenticated = async (req, res, next) => {
             req.user = { username, _id };
             next();
         } catch (error) {
-            console.log(error.name, error.message);
-            res.status(403).json({ success: 'failed', msg: 'invalid token' })
+            res.status(403).json({ success: 'failed', msg: 'invalid Token' })
         }
     } else {
-        res.status(403).send('not authenticated')
+        res.status(403).json({ type: "failed", message: 'not authenticated' })
     }
 }
 

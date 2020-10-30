@@ -157,11 +157,27 @@ describe('NAVBAR Component', () => {
         const lazyElement = screen.queryAllByRole('link');
         expect(lazyElement).toHaveLength(0)
     })
+
     it('should render when logged in', () => {
         renderWithContext(<NavBar />, { isLoggedIn: true })
         const links_text_content = screen.getAllByRole('link').map(link => link.textContent)
-        expect(links_text_content).toHaveLength(5);
-        expect(links_text_content).toEqual(['MyTeam', 'Jobs', 'Candidates', 'Settings', 'Logout'])
+        expect(links_text_content).toHaveLength(4);
+        expect(links_text_content).toEqual(['Jobs', 'Candidates', 'Settings', 'Logout'])
+    })
+
+    it('should have a logo button on top', () => {
+        const { container } = renderWithContext(<NavBar />, { isLoggedIn: true });
+        const item = screen.getAllByRole('listitem')
+        const [logo] = item
+        expect(item[0]).toHaveClass("logo")
+    })
+    it('should open navBar when logo is clicked', () => {
+        const { container } = renderWithContext(<NavBar />, { isLoggedIn: true });
+        const [logo] = screen.getAllByRole('listitem')
+        expect(container.firstChild).not.toHaveClass('active');
+        fireEvent.click(logo)
+        expect(container.firstChild).toHaveClass('active');
+
     })
 })
 

@@ -16,7 +16,7 @@ router.get('/', isAuthenticated, async (req, res) => {
         res.json(user);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server Error');
+        res.status(500).send({ status: "ERROR", message: 'Server Error' });
     }
 });
 
@@ -35,7 +35,6 @@ router.post('/register', async (req, res) => {
         });
         const saved_user = await newUser.save();
         res.status(200).send({ status: 'SUCCESS', data: saved_user });
-
     } catch (error) {
         console.log(`err : ${error}`);
         res.status(500).send({ status: 'FAILED', msg: error })
