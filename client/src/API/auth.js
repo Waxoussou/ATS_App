@@ -17,7 +17,7 @@ export const fetchLogin = async (body) => {
 
 export const fetchLoggedInUser = async (token) => {
     try {
-        const res = await fetch('api/auth', { headers: { Authorization: token } });
+        const res = await fetch('/api/auth', { headers: { Authorization: token } })
         const json = await res.json();
         if (json.status === 'ERROR') { throw new Error(json.message) };
         return { username: json.username }
@@ -28,7 +28,7 @@ export const fetchLoggedInUser = async (token) => {
 
 export const fetchRegister = async (body) => {
     try {
-        const res = await fetch('api/auth/register', {
+        const res = await fetch('/api/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
@@ -48,7 +48,7 @@ export const fetchDeleteUser = async (password, token) => {
         body: JSON.stringify({ password })
     }
     try {
-        const res = await fetch('api/auth/deleteProfile', options);
+        const res = await fetch('/api/auth/deleteProfile', options);
         const json = await res.json();
         if (json.status === 'FAILED') throw new Error(json.msg);
         return { status: 'SUCCESS', payload: { message: 'your profile was deleted successfully', type: 'LOGIN' } }

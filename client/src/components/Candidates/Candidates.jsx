@@ -56,7 +56,7 @@ const Candidates = () => {
                     <Link to='addCandidate' ><button>ADD NEW CANDIDATE</button></Link>
                 </div>
                 <h1 className="section-title">CANDIDATS</h1>
-                {target_list.length > 0 ?
+                {target_list?.length > 0 ?
                     target_list.map((candidate, i) => <Usercard key={candidate._id + i}
                         candidate={candidate}
                         deleteCandidate={deleteCandidate}

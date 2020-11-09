@@ -3,7 +3,6 @@ import AuthContext from './authContext';
 import authReducer from './authReducer';
 import AUTH_ACTIONS from '../../actions/authAction';
 
-
 import * as API from '../../API/auth';
 
 const AuthState = props => {
@@ -53,7 +52,6 @@ const AuthState = props => {
             }
         }
         dispatch({ type: AUTH_ACTIONS.REGISTER });
-
         const userSaved = await API.fetchRegister(body)
         userSaved.status === "SUCCESS" ?
             login(body.username, body.password) :

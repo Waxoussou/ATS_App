@@ -5,6 +5,8 @@ import CANDIDATE_ACTIONS from '../../actions/candidateAction';
 
 import AuthContext from '../auth/authContext';
 
+import controller from '../../API/candidate';
+
 const CandidateState = props => {
     const initialState = {
         current: {
@@ -25,53 +27,21 @@ const CandidateState = props => {
     const { token } = authContext;
 
     const loadCandidates = async _ => {
-        try {
-            const options = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                }
-            }
-            const res = await fetch('/api/candidates', options);
-            const json = await res.json();
-            console.log('CANDIDATES : ', json)
-            dispatch({ type: CANDIDATE_ACTIONS.LOAD_CANDIDATES, payload: { candidates: json } })
-        } catch (error) {
-            console.log(error);
-        }
+        const payload = await controller.loadCandidates(token);
+        dispatch({ type: CANDIDATE_ACTIONS.LOAD_CANDIDATES, payload })
     }
 
     const createCandidate = async (candidate) => {
-        const { name, lastname, job_title, current_position, expected_position, current_company } = candidate;
+        // const { name, lastname, job_title, current_position, expected_position, current_company } = candidate;
         console.log('BEFORE CREATING CANDIDATE FROMS STATE REDUCER', candidate)
-        try {
-            const body = { name, lastname, job_title, current_position, expected_position, current_company };
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: token,
-                },
-                body: JSON.stringify(body)
-            }
-            const res = await fetch('/api/candidates', options)
-            const json = await res.json();
-            console.log('new candidate : ', json);
+        const new_user = await controller.createCandidate(candidate, token);
+        new_user.status === "SUCCESS" &&
             dispatch({ type: CANDIDATE_ACTIONS.CREATE_CANDIDATE })
-        } catch (error) { console.log(error) }
     }
-    
+
     const deleteCandidate = async (id) => {
-        console.log(id)
-        const options = { method: 'DELETE', headers: { 'Content-Type': 'application/json', Authorization: token } }
-        try {
-            const res = await fetch(`/api/candidates/${id}`, options)
-            const json = await res.json()
-            console.log(json)
-            loadCandidates();
-        } catch (e) {
-            console.log(e)
-        }
+        const del_user = await controller.deleteCandidate(id, token)
+        del_user.status === "SUCCESS" && loadCandidates();
     }
 
     return (
