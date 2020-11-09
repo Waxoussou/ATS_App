@@ -3,8 +3,7 @@ import AuthContext from './authContext';
 import authReducer from './authReducer';
 import AUTH_ACTIONS from '../../actions/authAction';
 
-
-import { fetchLogin } from '../../API/auth';
+import controller from '../../API/auth';
 
 const AuthState = props => {
     const initialState = {
@@ -19,19 +18,10 @@ const AuthState = props => {
 
     const loadUser = async () => {
         const { token } = state;
-        if (token) {
-            try {
-                const res = await fetch('api/auth/', { headers: { Authorization: token } });
-                const json = await res.json()
-                if (json.success === 'failed') throw new Error(json.msg)
-                dispatch({ type: AUTH_ACTIONS.LOAD_USER, payload: { username: json.username, token: token } })
-            } catch (error) {
-                console.log(error)
-                dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } })
-            }
-        } else {
-            dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } })
-        }
+        const payload = token && await controller.loadUser(token);
+        !payload || payload.error ?
+            setErrorMessage({ error: null }) :
+            dispatch({ type: AUTH_ACTIONS.LOAD_USER, payload })
     }
 
     const login = async (username, password) => {
@@ -40,7 +30,7 @@ const AuthState = props => {
             return setErrorMessage({ error: { message: error_message, type: 'FORM_FIELD' } });
         } else {
             const body = { username, password }
-            const payload = await fetchLogin(body);
+            const payload = await controller.login(body);
             payload.error ?
                 setErrorMessage(payload) :
                 dispatch({ type: AUTH_ACTIONS.LOGIN, payload: payload });
@@ -64,8 +54,8 @@ const AuthState = props => {
     };
 
     // Register
-    const register = async ({ username, name, lastname, email, password }) => {
-        const body = { username, lastname, name, email, password };
+    const register = async ({ username, firstname, lastname, email, password }) => {
+        const body = { username, lastname, firstname, email, password };
         const type = AUTH_ACTIONS.REGISTER
         for (let input in body) {
             if (!body[input]) {

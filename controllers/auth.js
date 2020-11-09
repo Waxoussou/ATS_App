@@ -16,14 +16,14 @@ module.exports = {
 
     register: async (req, res) => {
         try {
-            const { name, lastname, username, password } = req.body
+            const { firstname, lastname, username, email, password } = req.body
             const user = await Recruiter.findOne({ username: username })
 
             if (user) return res.status(401).send({ status: 'FAILED', msg: 'username already exist' });
 
             const hashedPassword = await bcrypt.hash(password, 10);
             const newUser = new Recruiter({
-                name, lastname, username,
+                firstname, lastname, email, username,
                 password: hashedPassword
             });
             const saved_user = await newUser.save();
