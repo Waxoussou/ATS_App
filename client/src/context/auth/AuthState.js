@@ -71,7 +71,6 @@ const AuthState = props => {
         }
     }
 
-
     const setErrorMessage = (error) => {
         dispatch({ type: AUTH_ACTIONS.ERROR, payload: error });
         clearError();
@@ -82,6 +81,7 @@ const AuthState = props => {
             dispatch({ type: AUTH_ACTIONS.ERROR, payload: { error: null } })
         }, timeout);
     };
+
     return (
         <AuthContext.Provider
             value={{

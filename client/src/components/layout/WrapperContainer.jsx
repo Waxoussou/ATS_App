@@ -1,19 +1,17 @@
 import React, { useEffect, useContext } from 'react';
-import { BrowserRouter as Router, Route,     Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import HomePage from './components/Homepage/HomePage';
-import Navbar from './components/Navbar';
-import Jobs from "./components/Projects/Jobs";
-import Candidates from "./components/Candidates/Candidates";
-import AddCandidate from './components/Candidates/AddCandidate';
-import Settings from "./components/Settings";
-import AddProject from './components/Projects/AddProject';
-import Dashboard from './components/Dashboard/Dashboard';
-import AuthContext from './context/auth/authContext';
-import JobPage from './components/Projects/JobPage';
-import CandidateProfile from './components/Candidates/CandidateProfile';
-
-import './App.css';
+import HomePage from '../Homepage/HomePage';
+import Navbar from './Navbar';
+import Jobs from "../Projects/Jobs";
+import Candidates from "../Candidates/Candidates";
+import AddCandidate from '../Candidates/AddCandidate';
+import Settings from "../Settings";
+import AddProject from '../Projects/AddProject';
+import Dashboard from '../Dashboard/Dashboard';
+import AuthContext from '../../context/auth/authContext';
+import JobPage from '../Projects/JobPage';
+import CandidateProfile from '../Candidates/CandidateProfile';
 
 function WrapperContainer() {
     const authState = useContext(AuthContext);
@@ -24,8 +22,8 @@ function WrapperContainer() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    return (!isLoggedIn || !token ? <HomePage />
-        :
+    return (!isLoggedIn || !token ?
+        <HomePage /> :
         <div className='App'>
             <Router>
                 <Navbar ></Navbar>

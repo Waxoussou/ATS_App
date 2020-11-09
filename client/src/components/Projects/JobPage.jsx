@@ -50,7 +50,7 @@ const JobPage = () => {
         </div>
         <div className="applications">
             {/* TEMPORARY */}
-            {current.applications.map(appli => <div>{appli.candidate_id.name} {appli.candidate_id.lastname}</div>)}
+            {current.applications.map(appli => <div>{appli?.candidate_id?.firstname} {appli?.candidate_id?.lastname}</div>)}
         </div>
         <button onClick={handleDelete}>delete</button>
     </div>

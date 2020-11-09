@@ -4,7 +4,7 @@ import AuthState from './context/auth/AuthState';
 import ProjectState from './context/project/ProjectState';
 import CandidateState from "./context/candidate/candidateState";
 
-import WrapperContainer from './WrapperContainer';
+import WrapperContainer from './components/layout/WrapperContainer';
 import './App.css';
 
 function App() {
