@@ -44,7 +44,7 @@ const Candidates = () => {
         {selectedCandidate._id ?
             <Jobseeker unselectCandidate={unselectCandidate} current={selectedCandidate} /> :
             <div className='candidate__section'>
-                <div className='candidates__filters'>
+                <div className='candidates__filters section-header'>
                     <SearchBar handleSearch={handleSearch} />
                     <Link to='addCandidate' ><button>ADD NEW CANDIDATE</button></Link>
                 </div>

@@ -151,7 +151,7 @@ main {
   .active .logo-text {
     left: 0px;
   }
-  .job-section-header {
+  .section-header, .job-section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;

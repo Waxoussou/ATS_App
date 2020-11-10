@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ProjectContext from '../../context/project/projectContext';
 
+import GoBack from "../layout/GoBack";
+
 const JobPage = () => {
     const projectContext = useContext(ProjectContext);
     const { projects, deleteProject, loadProject } = projectContext;
@@ -22,7 +24,10 @@ const JobPage = () => {
     }
 
     return <div>
-        <h3>JOB PAGE ACCUEIL</h3>
+        <div className="project-page-header section-header">
+            <h3>JOB PAGE ACCUEIL</h3>
+            <GoBack />
+        </div>
         <div className='project-informations'>
             <p className='project-job-title'> {current?.title}</p>
             <p className='project-localisation'>{current?.localisation?.city}</p>
