@@ -12,7 +12,7 @@ const JobPage = () => {
     // so we need to load them again in order to get current project data 
     useEffect(() => {
         if (!projects.length) loadProject()
-    }, [])
+    }, [projects.length, loadProject])
 
     const current = projects.filter(project => project._id === id)[0];
 

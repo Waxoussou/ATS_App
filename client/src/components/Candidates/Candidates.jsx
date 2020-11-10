@@ -23,22 +23,15 @@ const Candidates = () => {
 
     useEffect(() => {
         loadCandidates()
-        // eslint-disable-next-line
-    }, []);
+    }, [loadCandidates]);
 
     useEffect(() => {
-        const filter_candidates = candidates.filter(({ name, lastname }) => name.toLowerCase().startsWith(filter.toLowerCase()) || lastname.toLowerCase().startsWith(filter.toLowerCase()));
+        const filter_candidates = candidates.filter(({ firstname, lastname }) => firstname.toLowerCase().startsWith(filter.toLowerCase()) || lastname.toLowerCase().startsWith(filter.toLowerCase()));
         setFilter_list(filter_candidates);
-        // eslint-disable-next-line
-    }, [filter])
+    }, [filter, setFilter_list, candidates])
 
-    const handleSearch = ({ target: { value: filtre } }) => setFilter(filtre)
-    const handleModal = (id) => {
-        setStateModal({
-            isOpen: !stateModal.isOpen,
-            candidate_id: id
-        })
-    }
+    const handleSearch = ({ target: { value: filtre } }) => setFilter(filtre);
+    const handleModal = (id) => setStateModal({ isOpen: !stateModal.isOpen, candidate_id: id });
     const selectUser = (id) => {
         const current_candidate = candidates.filter(candi => candi._id === id);
         setSelection({ ...current_candidate[0] })

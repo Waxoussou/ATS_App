@@ -4,7 +4,7 @@ export const fetchLogin = async (body) => {
         body: JSON.stringify(body)
     }
     try {
-        const res = await fetch('api/auth/login', options)
+        const res = await fetch('/api/auth/login', options)
             .catch(err => console.log('fetch err: ', err));
         const json = await res.json();
         if (json.status === 'failed' || !json.data) throw new Error(json.msg);

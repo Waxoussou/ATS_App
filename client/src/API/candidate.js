@@ -1,5 +1,5 @@
-export default {
-    loadCandidates: async (token) => {
+export default (token) => ({
+    loadCandidates: async () => {
         try {
             const options = {
                 headers: {
@@ -11,12 +11,11 @@ export default {
             const json = await res.json();
             return { status: 'SUCCESS', candidates: json }
         } catch (error) {
-            console.log(error);
             return { status: 'FAILED', error: { message: error.message, type: "USER" } }
         }
     },
 
-    createCandidate: async (body, token) => {
+    createCandidate: async (body) => {
         try {
             const options = {
                 method: 'POST',
@@ -39,7 +38,9 @@ export default {
         }
     },
 
-    deleteCandidate: async (id, token) => {
+    updateCandidate: async (id, user_updates) => { },
+
+    deleteCandidate: async (id) => {
         const options = { method: 'DELETE', headers: { 'Content-Type': 'application/json', Authorization: token } }
         try {
             const res = await fetch(`/api/candidates/${id}`, options)
@@ -57,4 +58,4 @@ export default {
 
     }
 
-}
+})

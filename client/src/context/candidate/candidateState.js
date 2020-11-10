@@ -5,7 +5,7 @@ import CANDIDATE_ACTIONS from '../../actions/candidateAction';
 
 import AuthContext from '../auth/authContext';
 
-import controller from '../../API/candidate';
+import Controller from '../../API/candidate';
 
 const CandidateState = props => {
     const initialState = {
@@ -23,11 +23,11 @@ const CandidateState = props => {
 
     const [state, dispatch] = useReducer(candidateReducer, initialState);
 
-    const authContext = useContext(AuthContext);
-    const { token } = authContext;
+    const { token } = useContext(AuthContext);
+    const controller = Controller(token);
 
     const loadCandidates = async _ => {
-        const payload = await controller.loadCandidates(token);
+        const payload = await controller.loadCandidates();
         dispatch({ type: CANDIDATE_ACTIONS.LOAD_CANDIDATES, payload })
     }
 
